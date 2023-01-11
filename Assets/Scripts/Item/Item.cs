@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ar_m : EnemyHP
+public class Item : MonoBehaviour
 {
-    public float speed = 3f;
+    public float speed;
+    public Rigidbody2D rd;
     // Start is called before the first frame update
     void Start()
     {
-        HP = 15;
-        damage = 15;
-        Destroy(gameObject, 10f);
+        rd = GetComponent<Rigidbody2D>();
+        transform.position = new Vector2(Random.Range(-2f, 2f), transform.position.y);
     }
 
     // Update is called once per frame

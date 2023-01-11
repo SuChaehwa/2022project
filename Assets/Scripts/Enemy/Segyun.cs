@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bakteri_a : EnemyHP
+public class Segyun : EnemyHP
 {
-    public float speed = 2f;
+
+    public float speed = 3f;
     // Start is called before the first frame update
     void Start()
     {
-        HP = 5;
-        damage = 10;
-        Destroy(gameObject, 6f);
+        HP = 10;
+        damage = 20;
     }
 
     // Update is called once per frame
