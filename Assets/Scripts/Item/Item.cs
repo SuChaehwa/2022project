@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public float speed;
+    public float speed=2;
     public Rigidbody2D rd;
     // Start is called before the first frame update
     void Start()

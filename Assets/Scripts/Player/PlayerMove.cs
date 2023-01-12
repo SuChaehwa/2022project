@@ -37,14 +37,14 @@ public class PlayerMove : MonoBehaviour
         playerRigidbody.velocity = new Vector2(xInput, yInput);
 
 
-        /*Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (pos.x < 0f) pos.x = 0f;
         if (pos.x > 1f) pos.x = 1f;
         if (pos.y < 0f) pos.y = 0f;
         if (pos.y > 1f) pos.y = 1f;
-        transform.position = Camera.main.ViewportToWorldPoint(pos);*/
+        transform.position = Camera.main.ViewportToWorldPoint(pos);
 
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -1.662496f, 1.664077f), Mathf.Clamp(transform.position.y, -4.286839f, 4.433f));
+        /*transform.position = new Vector2(Mathf.Clamp(transform.position.x, -1.662496f, 1.664077f), Mathf.Clamp(transform.position.y, -4.286839f, 4.433f));*/
     }
 
     public void OnTriggerEnter2D(Collider2D ooo)

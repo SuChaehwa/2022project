@@ -11,6 +11,10 @@ TagManager:
   - pain
   - armG
   - Shield
+  - Shield_Item
+  - blood
+  - BossBullet
+  - Boss
   layers:
   - Default
   - TransparentFX

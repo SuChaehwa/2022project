@@ -14,20 +14,8 @@ public class EnemyHP : MonoBehaviour
     public void Awake()
     {
         rd = GetComponent<Rigidbody2D>();
-        transform.position = new Vector2(Random.Range(-2f, 2f),transform.position.y);
+        if(!gameObject.CompareTag("Boss")) transform.position = new Vector2(Random.Range(-2f, 2f),transform.position.y);
     }
-    void Start()
-    {
-        
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "playerBullet")
@@ -47,7 +35,7 @@ public class EnemyHP : MonoBehaviour
     {
         if (ooo.gameObject.tag == "Player" )
         {
-            Destroy(gameObject);
+            if (!gameObject.CompareTag("Boss"))  Destroy(gameObject);
             if(!GameManager.instance.isMuJuck)
             {
                 GameManager.instance.PlayerHPG(damage * 3);

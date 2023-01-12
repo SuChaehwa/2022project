@@ -26,13 +26,15 @@ public class GameManager : MonoBehaviour
     public Slider painBar;
 
     public GameObject shield;
+    public GameObject Boss;
 
     public SpriteRenderer shieldren;
     public SpriteRenderer playerren;
 
     public int score = 0;
-    public int playerHP = 100;
+    public int playerHP = 1000;
     public int pain = 0;
+    public int bulletLevel = 1;
 
     public float shieldTime;
 
@@ -54,24 +56,47 @@ public class GameManager : MonoBehaviour
     {
         Shieldmanage();
 
-        if(Input.GetKeyUp(KeyCode.Q))
+        ccc();
+    }
+
+    private void ccc()
+    {
+        if (Input.GetKeyUp(KeyCode.Z))
         {
-            score += 200;
-            Score(0);
+            Score(1000);
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            PlayerHPG(20);
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+
+            PainG(20);
+        }
+        if (Input.GetKeyUp(KeyCode.V))
+        {
+
+            if(bulletLevel<5) bulletLevel++;
         }
     }
     
     IEnumerator Die()
     {
+        Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(3);
-        SceneManager.LoadScene(0);
+        GameOver();
     }
 
     public void Score(int add)
     {
         score += add;
         scoreText.text = "SCORE | " + score;
-        if(score > 1000) isBossTime= true;
+        if (score > 10000)
+        {
+            isBossTime = true;
+            Boss.SetActive(true);
+        }
     }
 
     public void PlayerHPG(int damage)
@@ -86,7 +111,7 @@ public class GameManager : MonoBehaviour
     public void PainG(int damage)
     {
         painBar.value += damage;
-        if (painBar.value >= 100)
+        if (painBar.value >= 1000)
         {
             StartCoroutine("Die");
         }
@@ -142,4 +167,9 @@ public class GameManager : MonoBehaviour
         playerren.enabled = true;
     }
 
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

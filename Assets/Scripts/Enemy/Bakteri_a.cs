@@ -22,7 +22,7 @@ public class Bakteri_a : EnemyHP
 
     public void OnCollisionEnter2D(Collision2D ooo)
     {
-        if (ooo.gameObject.tag == "wall" || ooo.gameObject.tag == "enemy") LR *= -1;
+        if (ooo.gameObject.tag == "wall" || ooo.gameObject.tag == "enemy" || ooo.gameObject.CompareTag("Boss")) LR *= -1;
         if (ooo.gameObject.tag == "Player")
         {
             Destroy(gameObject); 

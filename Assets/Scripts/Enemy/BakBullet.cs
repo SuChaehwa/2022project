@@ -30,7 +30,7 @@ public class BakBullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D ooo)
     {
-        if (ooo.gameObject.tag == "wall" || ooo.gameObject.tag == "enemy") StartCoroutine("Hihi");
+        if (ooo.gameObject.tag == "wall" || ooo.gameObject.tag == "enemy" || ooo.gameObject.CompareTag("Boss")) StartCoroutine("Hihi");
     }
 
 }
