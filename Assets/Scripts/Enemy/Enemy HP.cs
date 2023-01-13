@@ -24,11 +24,14 @@ public class EnemyHP : MonoBehaviour
             Destroy(collision.gameObject);
             if (HP <= 0)
             {
-                Destroy(gameObject);
+                if (!gameObject.CompareTag("Boss")) Destroy(gameObject);
                 GameManager.instance.Score(score);
             }
         }
-        else if (collision.gameObject.tag == "Shield") Destroy(gameObject);
+        else if (collision.gameObject.tag == "Shield")
+        {
+            if (!gameObject.CompareTag("Boss")) Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D ooo)
@@ -38,7 +41,7 @@ public class EnemyHP : MonoBehaviour
             if (!gameObject.CompareTag("Boss"))  Destroy(gameObject);
             if(!GameManager.instance.isMuJuck)
             {
-                GameManager.instance.PlayerHPG(damage * 3);
+                GameManager.instance.PlayerHPG(damage*3);
                 GameManager.instance.Mumanage();
             }
         }

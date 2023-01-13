@@ -58,6 +58,16 @@ public class PlayerMove : MonoBehaviour
                 GameManager.instance.Mumanage();
             }
         }
+        if (ooo.gameObject.tag == "BossBullet")
+        {
+            Destroy(ooo.gameObject);
+            if (!GameManager.instance.isMuJuck)
+            {
+                GameManager.instance.PlayerHPG(5);
+                GameManager.instance.Mumanage();
+            }
+        }
+
         if (ooo.gameObject.tag == "armG" && !GameManager.instance.isMuJuck)
         {
             GameManager.instance.PlayerHPG(5);

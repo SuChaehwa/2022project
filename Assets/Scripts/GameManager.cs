@@ -24,7 +24,8 @@ public class GameManager : MonoBehaviour
 
     public Slider hPBar;
     public Slider painBar;
-
+    
+    public GameObject bossHPBar;
     public GameObject shield;
     public GameObject Boss;
 
@@ -39,17 +40,14 @@ public class GameManager : MonoBehaviour
     public float shieldTime;
 
     public Text scoreText;
+    public Text hpText;
+    public Text painText;
 
     public bool isMuJuck = false;
     public bool isShield2 = false;
     public bool isBossTime = false;
     
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int a;
 
     // Update is called once per frame
     void Update()
@@ -61,33 +59,33 @@ public class GameManager : MonoBehaviour
 
     private void ccc()
     {
+        //스코어 올리기
         if (Input.GetKeyUp(KeyCode.Z))
         {
             Score(1000);
         }
+        //플레이어 Hp 올리기
         if (Input.GetKeyUp(KeyCode.X))
         {
             PlayerHPG(20);
         }
+        //고통 게이지 줄이기
         if (Input.GetKeyUp(KeyCode.C))
         {
-
             PainG(20);
         }
+        //총 업글
         if (Input.GetKeyUp(KeyCode.V))
         {
-
             if(bulletLevel<5) bulletLevel++;
+        }
+        // 쉴드 3초
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            shieldTime = 3;
         }
     }
     
-    IEnumerator Die()
-    {
-        Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(3);
-        GameOver();
-    }
-
     public void Score(int add)
     {
         score += add;
@@ -96,28 +94,33 @@ public class GameManager : MonoBehaviour
         {
             isBossTime = true;
             Boss.SetActive(true);
+            bossHPBar.SetActive(true);
         }
     }
 
     public void PlayerHPG(int damage)
     {
         hPBar.value -= damage;
-        if(hPBar.value <= 0)
+        hpText.text = (int)(hPBar.value / 10) + " %";
+        if (hPBar.value <= 0)
         {
-            StartCoroutine("Die");
+            Debug.Log("GameOver PlayerHp");
+            GameOver();
         }
     }
 
     public void PainG(int damage)
     {
         painBar.value += damage;
+        painText.text = (int)(painBar.value / 10) + " %";
         if (painBar.value >= 1000)
         {
-            StartCoroutine("Die");
+            Debug.Log("GameOver Pain");
+            GameOver();
         }
     }
 
-    private int a;
+
     public void Shieldmanage()
     {
         shieldTime -= Time.deltaTime;
@@ -167,9 +170,16 @@ public class GameManager : MonoBehaviour
         playerren.enabled = true;
     }
 
+    IEnumerator Die()
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(3);
+        SceneManager.LoadScene(0);
+    }
 
     public void GameOver()
     {
-        SceneManager.LoadScene(0);
+        StartCoroutine(Die());
+        
     }
 }
