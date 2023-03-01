@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public int playerHP = 1000;
     public int pain = 0;
     public int bulletLevel = 1;
+    public int stage;//스테이지 몇인지 받아서
 
     public float shieldTime;
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
         {
             Score(1000);
         }
-        //플레이어 Hp 올리기
+        //플레이어 Hp 내리기
         if (Input.GetKeyUp(KeyCode.X))
         {
             PlayerHPG(20);
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
     {
         score += add;
         scoreText.text = "SCORE | " + score;
-        if (score > 10000)
+        if (score > 10000*stage)//보스 등장 시기 조절 -->> 스테이지 2가 훨신 스코어가 높을수 밖에 없음
         {
             isBossTime = true;
             Boss.SetActive(true);
@@ -170,16 +171,19 @@ public class GameManager : MonoBehaviour
         playerren.enabled = true;
     }
 
+    public int lastScore = 0;
     IEnumerator Die()
     {
         Time.timeScale = 0f;
-        yield return new WaitForSecondsRealtime(3);
-        SceneManager.LoadScene(0);
+
+        lastScore = score + (int)(hPBar.value / 10) * 100 -(int)(painBar.value / 10) * 10;
+
+        yield return new WaitForSecondsRealtime(1);
+        SceneManager.LoadScene(4);
     }
 
     public void GameOver()
     {
-        StartCoroutine(Die());
-        
+        StartCoroutine(Die());  
     }
 }
