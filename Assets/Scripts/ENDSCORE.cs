@@ -11,10 +11,4 @@ public class ENDSCORE : MonoBehaviour
     {
         score.text = "Score | " + GameManager.instance.lastScore; 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

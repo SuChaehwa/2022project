@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     public bool isMuJuck = false;
     public bool isShield2 = false;
     public bool isBossTime = false;
+
+    public string nikname;
     
     private int a;
 
